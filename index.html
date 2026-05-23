@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sara Kothari</title>
+  <meta name="description" content="Stanford EE/CS student — ML, robotics, hardware." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #fff;
+      color: #111;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 2.5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-name {
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #111;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: #999;
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #111; }
+
+    /* HERO */
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 7rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .hero-text h1 {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      color: #555;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p a {
+      color: #111;
+      text-underline-offset: 3px;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-links a {
+      font-size: 0.78rem;
+      color: #999;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .hero-links a:hover { color: #111; border-color: #111; }
+
+    .hero-photo img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(12%);
+    }
+
+    /* MAIN */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    section { margin-bottom: 4rem; }
+
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #999;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* EXP */
+    .exp-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .exp-item:last-child { border-bottom: 1px solid #f0f0f0; }
+
+    .exp-left { flex: 1; }
+
+    .exp-role {
+      font-size: 0.88rem;
+      color: #111;
+      font-weight: 400;
+    }
+
+    .exp-org {
+      font-size: 0.82rem;
+      color: #888;
+      margin-top: 0.15rem;
+    }
+
+    .exp-date {
+      font-size: 0.75rem;
+      color: #bbb;
+      white-space: nowrap;
+      padding-top: 0.15rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* PROJECTS */
+    .proj-item {
+      padding: 0.9rem 0;
+      border-top: 1px solid #f0f0f0;
+    }
+    .proj-item:last-child { border-bottom: 1px solid #f0f0f0; }
+
+    .proj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .proj-title {
+      font-size: 0.88rem;
+      color: #111;
+    }
+
+    .proj-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .proj-links a {
+      font-size: 0.75rem;
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .proj-links a:hover { color: #111; }
+
+    .proj-desc {
+      font-size: 0.82rem;
+      color: #888;
+      margin-top: 0.2rem;
+    }
+
+    /* SIDEQUESTS */
+    .sq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 3rem;
+    }
+
+    .sq-item h3 {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: #111;
+      margin-bottom: 0.4rem;
+    }
+
+    .sq-item p, .sq-item ul {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.75;
+    }
+
+    .sq-item ul { padding-left: 1rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      color: #ccc;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo { display: none; }
+      .sq-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Sara Kothari</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#sidequests">Sidequests</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>Sara Kothari</h1>
+    <p>
+      Junior at Stanford studying Electrical Engineering (B.S.) and Computer Science / AI (M.S.).
+      I work on LLM-based chip verification at the <a href="#">Robust Systems Group</a> and embodied AI at the <a href="#">REAL Lab</a>.
+      Incoming AI for Chip Design intern at <a href="#">NVIDIA</a>.
+    </p>
+    <p>
+      Also: Tau Beta Pi, Apple NSI Scholar, and a pianist who has won 31 international competitions.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/sara-kothari" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/sara-kothari/" target="_blank">LinkedIn</a>
+      <a href="mailto:sarako@stanford.edu">Email</a>
+      <a href="https://www.sarakothari.com" target="_blank">CV</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <!-- Replace with your hosted photo URL, e.g.:
+         src="https://raw.githubusercontent.com/sara-kothari/sara-kothari.github.io/main/photo.jpg" -->
+    <img src="photo.jpg" alt="Sara Kothari" />
+  </div>
+</div>
+
+<main>
+
+  <section id="research">
+    <h2>research & work</h2>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-role">AI for Chip Design Intern — NVIDIA</div>
+        <div class="exp-org">Applied LLM Chip Design Team</div>
+      </div>
+      <div class="exp-date">Summer '26</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-role">Research — Robust Systems Group, Stanford</div>
+        <div class="exp-org">LLM-based RTL debugging & formal verification · Prof. Subhasish Mitra</div>
+      </div>
+      <div class="exp-date">Jan '25 – now</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-role">Research — Robotics & Embodied AI Lab, Stanford</div>
+        <div class="exp-org">EgoVerse imitation learning; RL finetuning for diffusion policies · Prof. Shuran Song</div>
+      </div>
+      <div class="exp-date">Summer '25</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-role">Research — Rajpurkar Lab, Harvard Medical School</div>
+        <div class="exp-org">LLMs for clinical decision-making in emergency departments · AAAI '26 under review</div>
+      </div>
+      <div class="exp-date">Jan – Aug '25</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-role">Applied Research Intern — Genloop</div>
+        <div class="exp-org">Semantic QnA over FHIR records; fine-tuned Llama & Mistral · <a href="https://arxiv.org/abs/2501.13687" target="_blank">ArXiv</a></div>
+      </div>
+      <div class="exp-date">Jun – Oct '24</div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>projects</h2>
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <span class="proj-title">FPGA Polyphonic Audio Synthesizer</span>
+        <div class="proj-links">
+          <a href="https://docs.google.com/document/d/1YiDj4LhAB6JrKtF7XOTZjFDDJy3v5BXfzCNbEZASzLw/edit?tab=t.0#heading=h.m9ao6jf6x6kw" target="_blank">Report</a>
+        </div>
+      </div>
+      <div class="proj-desc">EE 108 · Xilinx FPGA, Verilog RTL — polyphonic synthesis with 8 voices, ADSR, multi-instrument support</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <span class="proj-title">MusicGen Composer Style Transfer</span>
+        <div class="proj-links">
+          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/cs229finalproject-10.pdf" target="_blank">Paper</a>
+          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/CS229_Final_Poster.pdf" target="_blank">Poster</a>
+        </div>
+      </div>
+      <div class="proj-desc">CS 229 · Prompt-driven style transfer — "convert this Bach piece to Chopin's style"</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <span class="proj-title">Adversarial Defense for Vision Transformers</span>
+        <div class="proj-links">
+          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/CS231N___Final_Report-5.pdf" target="_blank">Paper</a>
+          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/231n_poster-3.pdf" target="_blank">Poster</a>
+        </div>
+      </div>
+      <div class="proj-desc">CS 231N · Lightweight defense pipeline, no base model modification, robust to 12+ attack types</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <span class="proj-title">LLM-Guided Poker Agent</span>
+        <div class="proj-links">
+          <a href="https://github.com/YannyGao/cs224r_FP/blob/my-feature-branch/cs224rFinalProject-3.pdf" target="_blank">Paper</a>
+          <a href="https://github.com/YannyGao/cs224r_FP" target="_blank">Code</a>
+        </div>
+      </div>
+      <div class="proj-desc">CS 224R · Actor-Critic RL with transformer opponent modeling and LLM feedback for Texas Hold'em</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-header">
+        <span class="proj-title">Phys.io — Physiotherapy Wearable</span>
+        <div class="proj-links">
+          <a href="https://drive.google.com/file/d/189Tf-TdgPMGA0mExFha5M-xco6FtzCcm/view?usp=sharing" target="_blank">Video</a>
+          <a href="https://drive.google.com/file/d/1vLQlanpJDR92UXGcbaVeX9qH8Q96Mz0J/view?usp=sharing" target="_blank">Poster</a>
+        </div>
+      </div>
+      <div class="proj-desc">IIT Delhi CM Bootcamp · ML-based physiotherapy monitoring, custom circuitry + embedded MCU</div>
+    </div>
+  </section>
+
+  <section id="sidequests">
+    <h2>sidequests</h2>
+    <div class="sq-grid">
+
+      <div class="sq-item">
+        <h3>Piano</h3>
+        <p>Prize-winner at 31 international competitions. Youngest girl in India to earn LTCL & ATCL diplomas. Attended Juilliard and Curtis summer programs.</p>
+        <p style="margin-top:0.5rem; color:#aaa; font-size:0.78rem; font-style:italic;">Currently learning: add your repertoire here</p>
+      </div>
+
+      <div class="sq-item">
+        <h3>Scuba Diving</h3>
+        <p>Add your certification, favourite dives, and where you want to dive next.</p>
+      </div>
+
+      <div class="sq-item">
+        <h3>Travel</h3>
+        <p>Add places you've been and places you want to go.</p>
+      </div>
+
+      <div class="sq-item">
+        <h3>Add another</h3>
+        <p>Books, films, hiking, whatever else you're into.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>sarako@stanford.edu</footer>
+
+</body>
+</html>
