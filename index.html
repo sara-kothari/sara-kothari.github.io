@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,26 +9,49 @@
   <meta property="og:title" content="Sara Kothari" />
   <meta property="og:description" content="Stanford EE/CS student — ML, robotics, hardware." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --black: #0f0f0f;
-      --soft: #f7f5f2;
+    :root[data-theme="dark"] {
+      --bg: #0c0c0c;
+      --bg2: #141414;
+      --bg3: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #666;
+      --muted2: #444;
+      --accent: #e8e8e8;
+      --tag-bg: #1a1a1a;
+      --nav-bg: rgba(12,12,12,0.9);
+      --photo-blend: multiply;
+      --toggle-icon: "☀";
+    }
+    :root[data-theme="light"] {
+      --bg: #fafafa;
+      --bg2: #f4f4f4;
+      --bg3: #efefef;
+      --border: #e2e2e2;
+      --text: #111;
       --muted: #888;
-      --border: #e8e5e0;
+      --muted2: #bbb;
+      --accent: #111;
+      --tag-bg: #f0f0f0;
+      --nav-bg: rgba(250,250,250,0.9);
+      --photo-blend: normal;
+      --toggle-icon: "☾";
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: #fff;
-      color: var(--black);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Geist', system-ui, sans-serif;
       font-weight: 300;
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.2s, color 0.2s;
     }
 
     /* NAV */
@@ -36,219 +59,248 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
+      height: 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 3rem;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
 
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-style: italic;
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 400;
       text-decoration: none;
-      color: var(--black);
-      letter-spacing: 0.01em;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-status {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 0;
       list-style: none;
     }
 
     .nav-links a {
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-weight: 300;
       text-decoration: none;
       color: var(--muted);
-      transition: color 0.2s;
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+      transition: background 0.12s, color 0.12s;
     }
-    .nav-links a:hover { color: var(--black); }
+    .nav-links a:hover { color: var(--text); background: var(--bg3); }
 
-    /* HERO — full width split */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      padding-top: 4rem;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 5rem 3rem 5rem 3rem;
-      border-right: 1px solid var(--border);
-    }
-
-    .hero-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
       color: var(--muted);
-      margin-bottom: 1.4rem;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: color 0.12s, border-color 0.12s;
+      font-family: 'Geist', sans-serif;
+    }
+    .theme-toggle:hover { color: var(--text); border-color: var(--muted); }
+
+    /* PAGE */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.2rem, 5vw, 5.5rem);
-      font-weight: 400;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
+    /* HERO */
+    .hero {
+      padding: 6rem 0 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 3rem;
+      align-items: start;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-name em {
-      font-style: italic;
-      display: block;
+    .hero-kicker {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-kicker::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--muted2);
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: var(--text);
     }
 
     .hero-bio {
-      max-width: 400px;
-      font-size: 0.9rem;
-      color: #444;
-      line-height: 1.85;
-      margin-bottom: 2.5rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
     }
 
-    .hero-bio a {
-      color: var(--black);
-      text-underline-offset: 3px;
-    }
+    .hero-bio strong { color: var(--text); font-weight: 400; }
 
-    .hero-contacts {
+    .hero-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
 
-    .hero-contacts a {
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .hero-links a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.68rem;
       color: var(--muted);
       text-decoration: none;
-      padding-bottom: 2px;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: color 0.15s, border-color 0.15s;
     }
-    .hero-contacts a:hover { color: var(--black); border-color: var(--black); }
+    .hero-links a:hover { color: var(--text); border-color: var(--muted); }
 
-    .hero-right {
+    /* PHOTO */
+    .hero-photo {
       position: relative;
-      overflow: hidden;
-      background: var(--soft);
+      margin-top: 0.5rem;
     }
 
-    .hero-right img {
+    .hero-photo img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 10%;
       display: block;
-      filter: grayscale(15%) contrast(1.03);
-      transition: transform 0.6s ease;
+      filter: grayscale(100%) contrast(1.1);
+      border-radius: 4px;
     }
 
-    .hero-right:hover img { transform: scale(1.02); }
-
-    .hero-caption {
+    .hero-photo::after {
+      content: '';
       position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      inset: 0;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      pointer-events: none;
     }
 
     /* SECTIONS */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 3rem;
+    .section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
     }
+    .section:last-of-type { border-bottom: none; }
 
-    section {
-      padding: 5rem 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-intro {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-      align-items: baseline;
-    }
-
-    .section-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
+    .section-heading {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
-      padding-top: 0.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
 
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
 
-    /* EXPERIENCE rows */
-    .exp-list { display: flex; flex-direction: column; }
-
-    .exp-row {
+    /* EXPERIENCE */
+    .exp-item {
       display: grid;
-      grid-template-columns: 200px 1fr auto;
-      gap: 0 3rem;
-      padding: 1.4rem 0;
-      border-top: 1px solid var(--border);
-      align-items: baseline;
-      transition: background 0.15s;
+      grid-template-columns: 130px 1fr auto;
+      gap: 0 1.5rem;
+      padding: 1rem 0.6rem;
+      border-radius: 6px;
+      margin: 0 -0.6rem;
+      transition: background 0.12s;
+      align-items: start;
     }
-    .exp-row:last-child { border-bottom: 1px solid var(--border); }
+    .exp-item:hover { background: var(--bg2); }
 
     .exp-date {
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.65rem;
       color: var(--muted);
-      padding-top: 0.1rem;
+      padding-top: 0.2rem;
+      line-height: 1.5;
     }
 
     .exp-role {
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       font-weight: 400;
-      color: var(--black);
+      color: var(--text);
       margin-bottom: 0.2rem;
     }
 
     .exp-sub {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--muted);
+      line-height: 1.6;
     }
 
-    .exp-sub a { color: inherit; text-underline-offset: 2px; }
-    .exp-sub a:hover { color: var(--black); }
+    .exp-sub a { color: inherit; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--border); }
+    .exp-sub a:hover { color: var(--text); }
 
-    .exp-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .exp-badge {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.6rem;
       color: var(--muted);
+      background: var(--tag-bg);
       border: 1px solid var(--border);
-      padding: 0.2rem 0.6rem;
-      border-radius: 99px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
       white-space: nowrap;
-      align-self: start;
-      margin-top: 0.15rem;
+      margin-top: 0.2rem;
     }
 
     /* PROJECTS */
@@ -258,72 +310,78 @@
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
     }
 
     .proj-card {
-      background: #fff;
-      padding: 1.8rem;
-      transition: background 0.15s;
-      cursor: default;
+      background: var(--bg);
+      padding: 1.4rem;
+      transition: background 0.12s;
     }
-    .proj-card:hover { background: var(--soft); }
+    .proj-card:hover { background: var(--bg2); }
 
-    .proj-course {
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
+    .proj-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .proj-name {
-      font-size: 0.9rem;
+      font-size: 0.84rem;
       font-weight: 400;
-      margin-bottom: 0.5rem;
+      color: var(--text);
       line-height: 1.4;
     }
 
-    .proj-desc {
-      font-size: 0.8rem;
+    .proj-course {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.6rem;
       color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .proj-links { display: flex; gap: 1rem; }
+    .proj-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+
+    .proj-links { display: flex; gap: 0.6rem; }
     .proj-links a {
-      font-size: 0.68rem;
-      letter-spacing: 0.04em;
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.62rem;
       color: var(--muted);
       text-decoration: none;
       border-bottom: 1px solid var(--border);
       padding-bottom: 1px;
-      transition: color 0.15s, border-color 0.15s;
+      transition: color 0.12s, border-color 0.12s;
     }
-    .proj-links a:hover { color: var(--black); border-color: var(--black); }
+    .proj-links a:hover { color: var(--text); border-color: var(--muted); }
 
     /* SIDEQUESTS */
-    .sq-layout {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0 3rem;
-    }
-
-    .sq-items { display: flex; flex-direction: column; gap: 0; }
-
     .sq-item {
-      padding: 1.6rem 0;
-      border-top: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 2rem;
+      grid-template-columns: 130px 1fr;
+      gap: 0 1.5rem;
+      padding: 1rem 0.6rem;
+      border-radius: 6px;
+      margin: 0 -0.6rem;
+      transition: background 0.12s;
       align-items: start;
     }
-    .sq-item:last-child { border-bottom: 1px solid var(--border); }
+    .sq-item:hover { background: var(--bg2); }
 
     .sq-name {
-      font-size: 0.9rem;
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.72rem;
       font-weight: 400;
+      color: var(--text);
+      padding-top: 0.05rem;
     }
 
     .sq-detail {
@@ -332,269 +390,278 @@
       line-height: 1.75;
     }
 
-    .sq-detail ul { padding-left: 0; list-style: none; }
-    .sq-detail li::before { content: "— "; color: #ccc; }
+    .sq-detail ul { list-style: none; padding: 0; margin-top: 0.5rem; }
+    .sq-detail li::before { content: "→ "; font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: var(--muted2); }
 
     /* FOOTER */
     footer {
-      padding: 2.5rem 3rem;
-      border-top: 1px solid var(--border);
+      padding: 2rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-top: 1px solid var(--border);
     }
 
-    footer .f-name {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.95rem;
+    .f-left {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
     }
 
-    footer .f-email {
-      font-size: 0.75rem;
+    footer a {
+      font-family: 'Geist Mono', monospace;
+      font-size: 0.68rem;
       color: var(--muted);
       text-decoration: none;
     }
-    footer .f-email:hover { color: var(--black); }
+    footer a:hover { color: var(--text); }
 
-    /* FADE IN */
+    /* REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
     .reveal.in { opacity: 1; transform: none; }
 
-    /* MOBILE */
-    @media (max-width: 700px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 5.5rem 1.5rem 2.5rem; border-right: none; border-bottom: 1px solid var(--border); }
-      .hero-right { height: 55vw; }
-      .container { padding: 0 1.5rem; }
-      .section-intro { grid-template-columns: 1fr; gap: 0.5rem; }
-      .exp-row { grid-template-columns: 1fr; gap: 0.3rem; }
-      .exp-tag { display: none; }
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-status { display: none; }
+      .page { padding: 0 1.25rem; }
+      .hero { grid-template-columns: 1fr; padding-top: 5rem; }
+      .hero-photo { width: 100px; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.2rem; }
+      .exp-date { font-size: 0.6rem; }
+      .exp-badge { display: none; }
       .proj-grid { grid-template-columns: 1fr; }
-      .sq-layout { grid-template-columns: 1fr; }
-      .sq-item { grid-template-columns: 1fr; gap: 0.5rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .sq-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      footer { flex-direction: column; gap: 0.4rem; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">Sara Kothari</a>
-  <ul class="nav-links">
-    <li><a href="#research">Research</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#sidequests">Sidequests</a></li>
-  </ul>
+  <div class="nav-left">
+    <a href="#" class="nav-logo">sara-kothari</a>
+    <span class="nav-status">Stanford '27</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#sidequests">Sidequests</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" id="toggle-btn">☀︎</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-left">
-    <h1 class="hero-name">Sara<em>Kothari</em></h1>
-    <p class="hero-bio">
-      I'm a junior at Stanford University studying Electrical Engineering and Computer Science (AI)! <br>
-      I work on chip design, embodied robotics, LLMs, and clinical AI. Incoming at NVIDIA this summer.
-    </p>
-    <div class="hero-contacts">
-      <a href="https://github.com/sara-kothari" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/sara-kothari/" target="_blank">LinkedIn</a>
-      <a href="mailto:sarako@stanford.edu">Email</a>
-      <a href="#">CV</a>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero reveal">
+    <div class="hero-text">
+      <div class="hero-kicker">EE + CS (AI) · Stanford University</div>
+      <h1>Sara Kothari</h1>
+      <p class="hero-bio">
+        I build at the intersection of <strong>hardware and intelligence</strong> — from RTL verification and FPGA design to embodied robotics and clinical AI. Currently researching LLM-based chip design at Stanford's Robust Systems Group and the Robotics & Embodied AI Lab. <strong>Incoming at NVIDIA</strong> this summer.
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/sara-kothari" target="_blank">github</a>
+        <a href="https://www.linkedin.com/in/sara-kothari/" target="_blank">linkedin</a>
+        <a href="mailto:sarako@stanford.edu">email</a>
+        <a href="#">cv.pdf</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <!-- Replace with your hosted photo URL -->
+      <img src="photo.jpg" alt="Sara Kothari" />
     </div>
   </div>
-  <div class="hero-right">
-    <!-- Update src to your hosted photo URL -->
-    <img src="photo.jpg" alt="Sara Kothari at the Japanese Tea Garden, San Francisco" />
-    <span class="hero-caption">San Francisco, 2025</span>
+
+  <!-- RESEARCH -->
+  <div class="section reveal" id="research">
+    <div class="section-heading">Research & Work</div>
+
+    <div class="exp-item">
+      <div class="exp-date">Summer 2026</div>
+      <div>
+        <div class="exp-role">AI for Chip Design Intern — NVIDIA</div>
+        <div class="exp-sub">Applied LLM Chip Design Team</div>
+      </div>
+      <div class="exp-badge">incoming</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan '25 – now</div>
+      <div>
+        <div class="exp-role">Robust Systems Group, Stanford</div>
+        <div class="exp-sub">LLM-based RTL debugging & formal verification · Prof. Subhasish Mitra</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Summer '25</div>
+      <div>
+        <div class="exp-role">Robotics & Embodied AI Lab, Stanford</div>
+        <div class="exp-sub">EgoVerse imitation learning; RL finetuning for diffusion policies · Prof. Shuran Song</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan – Aug '25</div>
+      <div>
+        <div class="exp-role">Rajpurkar Lab, Harvard Medical School</div>
+        <div class="exp-sub">LLMs for clinical decision-making in EDs · <a href="#">AAAI 2026 under review</a></div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jun – Oct '24</div>
+      <div>
+        <div class="exp-role">Applied Research Intern, Genloop</div>
+        <div class="exp-sub">Semantic QnA over FHIR records; fine-tuned Llama & Mistral · <a href="https://arxiv.org/abs/2501.13687" target="_blank">ArXiv ↗</a></div>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- RESEARCH -->
-<div class="container">
-  <section id="research">
-    <div class="section-intro reveal">
-      <span class="section-label">Research & Work</span>
-      <h2 class="section-title">Where I've been</h2>
-    </div>
-    <div class="exp-list">
-
-      <div class="exp-row reveal">
-        <div class="exp-date">Summer 2026</div>
-        <div>
-          <div class="exp-role">AI for Chip Design Intern</div>
-          <div class="exp-sub">NVIDIA — Applied LLM Chip Design Team</div>
-        </div>
-        <div class="exp-tag">Incoming</div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-date">Jan 2025 – now</div>
-        <div>
-          <div class="exp-role">Robust Systems Group, Stanford</div>
-          <div class="exp-sub">LLM-based RTL debugging & formal verification · Prof. Subhasish Mitra</div>
-        </div>
-        <div class="exp-tag">Research</div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-date">Summer 2025</div>
-        <div>
-          <div class="exp-role">Robotics & Embodied AI Lab, Stanford</div>
-          <div class="exp-sub">EgoVerse imitation learning; RL finetuning for diffusion policies · Prof. Shuran Song</div>
-        </div>
-        <div class="exp-tag">Research</div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-date">Jan – Aug 2025</div>
-        <div>
-          <div class="exp-role">Rajpurkar Lab, Harvard Medical School</div>
-          <div class="exp-sub">LLMs for clinical decision-making in EDs · <a href="#">AAAI 2026 under review</a></div>
-        </div>
-        <div class="exp-tag">Research</div>
-      </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-date">Jun – Oct 2024</div>
-        <div>
-          <div class="exp-role">Applied Research Intern, Genloop</div>
-          <div class="exp-sub">Semantic QnA over FHIR records; fine-tuned Llama & Mistral · <a href="https://arxiv.org/abs/2501.13687" target="_blank">ArXiv</a></div>
-        </div>
-        <div class="exp-tag">Industry</div>
-      </div>
-
-    </div>
-  </section>
 
   <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-intro reveal">
-      <span class="section-label">Projects</span>
-      <h2 class="section-title">Things I've built</h2>
-    </div>
+  <div class="section reveal" id="projects">
+    <div class="section-heading">Projects</div>
     <div class="proj-grid">
 
-      <div class="proj-card reveal">
-        <div class="proj-course">EE 108 · Hardware</div>
-        <div class="proj-name">FPGA Polyphonic Audio Synthesizer</div>
-        <p class="proj-desc">8-voice polyphonic synthesis on Xilinx FPGA. Verilog RTL with ADSR envelopes, harmonic overtones, multi-instrument support.</p>
-        <div class="proj-links"><a href="https://docs.google.com/document/d/1YiDj4LhAB6JrKtF7XOTZjFDDJy3v5BXfzCNbEZASzLw/edit?tab=t.0" target="_blank">Report ↗</a></div>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">FPGA Polyphonic Audio Synthesizer</div>
+          <div class="proj-course">EE 108</div>
+        </div>
+        <p class="proj-desc">8-voice synthesis on Xilinx FPGA. Verilog RTL, ADSR envelopes, harmonic overtones, multi-instrument.</p>
+        <div class="proj-links"><a href="https://docs.google.com/document/d/1YiDj4LhAB6JrKtF7XOTZjFDDJy3v5BXfzCNbEZASzLw/edit?tab=t.0" target="_blank">report ↗</a></div>
       </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-course">CS 229 · Machine Learning</div>
-        <div class="proj-name">MusicGen Composer Style Transfer</div>
-        <p class="proj-desc">Prompt-driven style transfer for classical music — "convert this Bach to Chopin." Fine-tuned Meta's MusicGen.</p>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">MusicGen Composer Style Transfer</div>
+          <div class="proj-course">CS 229</div>
+        </div>
+        <p class="proj-desc">Prompt-driven classical style transfer — "convert this Bach to Chopin." Fine-tuned Meta's MusicGen.</p>
         <div class="proj-links">
-          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/cs229finalproject-10.pdf" target="_blank">Paper ↗</a>
-          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/CS229_Final_Poster.pdf" target="_blank">Poster ↗</a>
+          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/cs229finalproject-10.pdf" target="_blank">paper ↗</a>
+          <a href="https://github.com/SKAssist/CS229-project-final/blob/main/CS229_Final_Poster.pdf" target="_blank">poster ↗</a>
         </div>
       </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-course">CS 231N · Computer Vision</div>
-        <div class="proj-name">Adversarial Defense for ViTs</div>
-        <p class="proj-desc">Lightweight defense pipeline for Vision Transformers. No base model modification, robust against 12+ attack types.</p>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Adversarial Defense for Vision Transformers</div>
+          <div class="proj-course">CS 231N</div>
+        </div>
+        <p class="proj-desc">Lightweight defense pipeline — no base model modification, robust against 12+ attack types.</p>
         <div class="proj-links">
-          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/CS231N___Final_Report-5.pdf" target="_blank">Paper ↗</a>
-          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/231n_poster-3.pdf" target="_blank">Poster ↗</a>
+          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/CS231N___Final_Report-5.pdf" target="_blank">paper ↗</a>
+          <a href="https://github.com/SKAssist/CS231N_FP/blob/main/231n_poster-3.pdf" target="_blank">poster ↗</a>
         </div>
       </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-course">CS 224R · Reinforcement Learning</div>
-        <div class="proj-name">LLM-Guided Poker Agent</div>
-        <p class="proj-desc">Texas Hold'em agent using Actor-Critic RL with transformer opponent modeling and LLM feedback. Curriculum training + bluff rewards.</p>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">LLM-Guided Poker Agent</div>
+          <div class="proj-course">CS 224R</div>
+        </div>
+        <p class="proj-desc">Texas Hold'em via Actor-Critic RL with transformer opponent modeling and LLM strategic feedback.</p>
         <div class="proj-links">
-          <a href="https://github.com/YannyGao/cs224r_FP/blob/my-feature-branch/cs224rFinalProject-3.pdf" target="_blank">Paper ↗</a>
-          <a href="https://github.com/YannyGao/cs224r_FP" target="_blank">Code ↗</a>
+          <a href="https://github.com/YannyGao/cs224r_FP/blob/my-feature-branch/cs224rFinalProject-3.pdf" target="_blank">paper ↗</a>
+          <a href="https://github.com/YannyGao/cs224r_FP" target="_blank">code ↗</a>
         </div>
       </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-course">Hardware + ML · IIT Delhi</div>
-        <div class="proj-name">Phys.io — Physiotherapy Wearable</div>
-        <p class="proj-desc">ML-based physiotherapy monitoring. Custom circuitry, embedded MCU, real-time feedback. 1 of 25 selected. Research at CMU & Northwestern.</p>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Phys.io — Physiotherapy Wearable</div>
+          <div class="proj-course">IIT Delhi</div>
+        </div>
+        <p class="proj-desc">ML-based physiotherapy monitoring with custom circuitry and embedded MCU. Research at CMU & Northwestern.</p>
         <div class="proj-links">
-          <a href="https://drive.google.com/file/d/189Tf-TdgPMGA0mExFha5M-xco6FtzCcm/view?usp=sharing" target="_blank">Video ↗</a>
-          <a href="https://drive.google.com/file/d/1vLQlanpJDR92UXGcbaVeX9qH8Q96Mz0J/view?usp=sharing" target="_blank">Poster ↗</a>
+          <a href="https://drive.google.com/file/d/189Tf-TdgPMGA0mExFha5M-xco6FtzCcm/view?usp=sharing" target="_blank">video ↗</a>
+          <a href="https://drive.google.com/file/d/1vLQlanpJDR92UXGcbaVeX9qH8Q96Mz0J/view?usp=sharing" target="_blank">poster ↗</a>
         </div>
       </div>
 
-      <div class="proj-card reveal">
-        <div class="proj-course">Entrepreneurship</div>
-        <div class="proj-name">WhyQ — Queue Management</div>
-        <p class="proj-desc">WhatsApp chatbot for queue management & hyper-local delivery during COVID-19. TiE Delhi regional first prize. 1,200+ users.</p>
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">WhyQ — Queue Management</div>
+          <div class="proj-course">Startup</div>
+        </div>
+        <p class="proj-desc">WhatsApp chatbot for queue management & delivery during COVID-19. TiE Delhi regional first prize. 1,200+ users.</p>
         <div class="proj-links"></div>
       </div>
 
     </div>
-  </section>
+  </div>
 
   <!-- SIDEQUESTS -->
-  <section id="sidequests">
-    <div class="section-intro reveal">
-      <span class="section-label">Sidequests</span>
-      <h2 class="section-title">Outside the lab</h2>
+  <div class="section reveal" id="sidequests">
+    <div class="section-heading">Sidequests</div>
+
+    <div class="sq-item">
+      <div class="sq-name">piano</div>
+      <div class="sq-detail">
+        Prize-winner at 31 international competitions. Youngest girl in India to earn LTCL & ATCL diplomas. Juilliard and Curtis summer programs.
+        <ul>
+          <li>Currently learning all four Chopin Ballades</li>
+        </ul>
+      </div>
     </div>
-    <div class="sq-items">
 
-      <div class="sq-item reveal">
-        <div class="sq-name">Piano</div>
-        <div class="sq-detail">
-          Prize-winner at 31 international competitions. Youngest girl in India to earn LTCL & ATCL diplomas. Attended Juilliard and Curtis summer programs.
-          <br><br>
-          <!-- Add your current repertoire here, e.g.: -->
-          <ul>
-            <li>Currently learning: All Chopin Ballades!</li>
-          </ul>
-        </div>
+    <div class="sq-item">
+      <div class="sq-name">scuba diving</div>
+      <div class="sq-detail">
+        Advanced Open Water Diver. Favourite: Lakshadweep Manta Point — diving with mantas is unreal.<br>
+        Logged dives in Lakshadweep, Maldives, Thailand, and the Andaman & Nicobar Islands.
+        <ul>
+          <li>Bucket list: Galápagos</li>
+          <li>Bucket list: Richelieu Rock, Similan Islands</li>
+        </ul>
       </div>
-
-      <div class="sq-item reveal">
-        <div class="sq-name">Scuba Diving</div>
-       <div class="sq-detail">
-  Advanced Open Water Diver.<br><br>
-  Favourite: Lakshadweep Manta Point — diving with mantas is unreal.<br><br>
-  Logged dives in Lakshadweep, Maldives, Thailand, and the Andaman & Nicobar Islands.<br><br>
-  Bucket list: Galápagos and Richelieu Rock, Similan Islands.
-</div>
-      </div>
-
-      <div class="sq-item reveal">
-        <div class="sq-name">Travel</div>
-        <div class="sq-detail">
-          <!-- Add countries visited or a fun fact about your travels -->
-          Add places you've been and places you want to go.
-        </div>
-      </div>
-
     </div>
-  </section>
-</div>
 
-<footer>
-  <span class="f-name">Sara Kothari</span>
-  <a href="mailto:sarako@stanford.edu" class="f-email">sarako@stanford.edu</a>
-</footer>
+    <!-- <div class="sq-item">
+      <div class="sq-name">travel</div>
+      <div class="sq-detail">
+        Add places you've been and places you want to go.
+      </div>
+    </div> -->
+
+  </div>
+
+  <footer>
+    <span class="f-left">sara-kothari.github.io</span>
+    <a href="mailto:sarako@stanford.edu">sarako@stanford.edu</a>
+  </footer>
+
+</div>
 
 <script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('toggle-btn');
+    if (html.getAttribute('data-theme') === 'dark') {
+      html.setAttribute('data-theme', 'light');
+      btn.textContent = '☾';
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '☀︎';
+    }
+  }
+
   const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
+    entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.style.transitionDelay = (i * 0.05) + 's';
         e.target.classList.add('in');
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.07 });
+  }, { threshold: 0.05 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 
