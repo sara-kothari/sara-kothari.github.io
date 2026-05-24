@@ -389,12 +389,21 @@
       color: var(--text);
       padding-top: 0.05rem;
     }
+    .sq-name a {
+  color: var(--text);
+  text-decoration: none;
+}
 
+.sq-name a:hover {
+  color: var(--muted);
+}
     .sq-detail {
       font-size: 0.82rem;
       color: var(--muted);
       line-height: 1.75;
     }
+
+    
 
     .sq-detail ul { list-style: none; padding: 0; margin-top: 0.5rem; }
     .sq-detail li::before { content: "→ "; font-family: 'Geist Mono', monospace; font-size: 0.7rem; color: var(--muted2); }
@@ -470,9 +479,11 @@
   </div>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#research">Research</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#sidequests">Sidequests</a></li>
+      <li><a href="#research">research</a></li>
+      <li><a href="#projects">projects</a></li>
+       <li><a href="#coursework">coursework</a></li>
+      <li><a href="#sidequests">sidequests</a></li>
+     
     </ul>
     <button class="theme-toggle" onclick="toggleTheme()" id="toggle-btn">☀︎</button>
   </div>
@@ -621,6 +632,109 @@
 
     </div>
   </div>
+  <!-- COURSEWORK -->
+<div class="section reveal" id="coursework">
+  <div class="section-heading">Selected Coursework</div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/cs336/" target="_blank">cs336</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Language Modeling from Scratch</strong><br>
+      End-to-end LLM systems course covering tokenizer construction, transformer implementation,
+      distributed training, FlashAttention/Triton optimization, scaling laws, Common Crawl data
+      pipelines, RL finetuning, and alignment. Built and optimized language models from scratch
+      across the full stack — data, systems, training, and reasoning.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/cs111/" target="_blank">cs111</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Operating Systems Principles</strong><br>
+      Processes, threads, synchronization, virtual memory, file systems, networking, and concurrency.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://cs231n.stanford.edu/" target="_blank">cs231n</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Deep Learning for Computer Vision</strong><br>
+      CNNs, transformers, generative models, self-supervised learning, detection, segmentation,
+      and adversarial robustness.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/cs224r/" target="_blank">cs224r</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Deep Reinforcement Learning</strong><br>
+      Policy gradients, actor-critic methods, offline RL, model-based RL, and RL for language agents.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://cs229.stanford.edu/" target="_blank">cs229</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Machine Learning</strong><br>
+      Statistical learning foundations, optimization, probabilistic models, deep learning,
+      and generalization.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://stanford-cs221.github.io/autumn2025/" target="_blank">cs221</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Artificial Intelligence: Principles & Techniques</strong><br>
+      Search, Markov decision processes, probabilistic inference, constraint satisfaction,
+      and machine learning foundations.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/cs161/" target="_blank">cs161</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Design & Analysis of Algorithms</strong><br>
+      Graph algorithms, dynamic programming, randomized algorithms, reductions,
+      NP-completeness, and approximation algorithms.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/cs153/" target="_blank">cs153</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Infrastructure at Scale</strong><br>
+      Distributed systems, datacenter-scale infrastructure, scheduling, reliability,
+      storage systems, and frontier-scale compute infrastructure.
+    </div>
+  </div>
+
+  <div class="sq-item">
+    <div class="sq-name">
+      <a href="https://web.stanford.edu/class/ee180/" target="_blank">ee180</a>
+    </div>
+    <div class="sq-detail">
+      <strong>Digital Systems Architecture</strong><br>
+      Processor architecture, pipelining, memory hierarchy, multicore systems,
+      accelerators, and hardware/software co-design.
+    </div>
+  </div>
+</div>
 
   <!-- SIDEQUESTS -->
   <div class="section reveal" id="sidequests">
